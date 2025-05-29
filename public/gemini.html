@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Gemini - Windkog.com</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        textarea { display: block; margin-bottom: 10px; width: 80%; max-width: 500px;}
+        button { padding: 10px 15px; }
+        #geminiResponse { 
+            border:1px solid #ccc; 
+            padding:10px; 
+            min-height:50px; 
+            margin-top:10px; 
+            background-color: #f9f9f9;
+            white-space: pre-wrap; /* This helps display newlines from Gemini's response */
+        }
+        #loadingIndicator { margin-top: 10px; color: #555; }
+    </style>
+</head>
+<body>
+    <h1>Windkog.com - Ask Gemini</h1>
+    <p>Enter your prompt or question for the Gemini Pro model below.</p>
+
+    <textarea id="promptInput" rows="5" cols="60" placeholder="e.g., Write a short poem about the future..."></textarea>
+
+    <button id="submitPrompt">Submit to Gemini</button>
+
+    <div id="loadingIndicator" style="display:none;">Gemini is thinking... please wait.</div>
+
+    <h3>Gemini's Response:</h3>
+    <div id="geminiResponse"></div>
+
+    <script src="/__/firebase/9.6.10/firebase-app-compat.js"></script> <script src="/__/firebase/9.6.10/firebase-functions-compat.js"></script> <script src="/__/firebase/init.js"></script>
+
+    <script>
+      // Wait for Firebase to initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        try {
+          // Ensure Firebase app is initialized (this should be true if init.js loaded correctly)
+          if (typeof firebase === 'undefined' || !firebase.app) {
+            console.error("Firebase app not initialized. Check /__/firebase/init.js configuration and SDK script includes.");
+            document.getElementById('geminiResponse').textContent = "Error: Firebase SDK not properly initialized. Check console (F12).";
+            document.getElementById('geminiResponse').style.color = "red";
+            return;
+          }
+
+          const functions = firebase.functions(); 
+          const submitButton = document.getElementById('submitPrompt');
+          const promptInput = document.getElementById('promptInput');
+          const responseDiv = document.getElementById('geminiResponse');
+          const loadingIndicator = document.getElementById('loadingIndicator');
+
+          submitButton.addEventListener('click', async () => {
+            const promptText = promptInput.value;
+            if (!promptText.trim()) {
+              responseDiv.textContent = "Please enter a prompt.";
+              responseDiv.style.color = "orange";
+              return;
+            }
+
+            responseDiv.textContent = ""; // Clear previous response
+            responseDiv.style.color = "black"; // Reset text color
+            loadingIndicator.style.display = 'block'; // Show loading
+            submitButton.disabled = true; // Disable button during processing
+
+            try {
+              const askGeminiFunction = functions.httpsCallable('askGemini'); // 'askGemini' is the name of your Cloud Function
+              const result = await askGeminiFunction({ prompt: promptText });
+
+              loadingIndicator.style.display = 'none'; // Hide loading
+              responseDiv.textContent = result.data.text; // The text response from your function
+            } catch (error) {
+              console.error("Error calling askGemini Cloud Function:", error);
+              loadingIndicator.style.display = 'none'; // Hide loading
+              responseDiv.style.color = "red";
+              responseDiv.textContent = "Error: " + error.message + ". Check the browser console (F12) and Cloud Function logs for more details.";
+            } finally {
+                submitButton.disabled = false; // Re-enable button
+            }
+          });
+        } catch (e) {
+          console.error("Critical error initializing Firebase or script:", e);
+          const responseDiv = document.getElementById('geminiResponse');
+          if(responseDiv) {
+            responseDiv.style.color = "red";
+            responseDiv.textContent = "Critical Error: Could not initialize script. Check browser console (F12).";
+          }
+        }
+      });
+    </script>
+</body>
+</html>

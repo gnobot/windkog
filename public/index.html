@@ -4,6 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WINDKOG - Advanced Kinetic Power Systems</title>
+    <meta name="description" content="WINDKOG transforms wind energy with ultralight WindBrella turbines and decoupled kinetic connections. Ground-based generator installations remain 100% weather-shielded.">
+    <meta name="keywords" content="WINDKOG, wind turbine, WindBrella, kinetic connections, renewable energy, green power, weatherproof wind power, STEM wind kit">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windkog-a4c20.web.app/">
+    <meta property="og:title" content="WINDKOG - Advanced Kinetic Power Systems">
+    <meta property="og:description" content="Decoupling mechanical rotation from power generation. Weather-shielded, highly efficient wind energy platforms and STEM classroom kits.">
+    <meta property="og:image" content="https://windkog-a4c20.web.app/images/sunset-ocean-column.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://windkog-a4c20.web.app/">
+    <meta property="twitter:title" content="WINDKOG - Advanced Kinetic Power Systems">
+    <meta property="twitter:description" content="Decoupling mechanical rotation from power generation. Weather-shielded, highly efficient wind energy platforms and STEM classroom kits.">
+    <meta property="twitter:image" content="https://windkog-a4c20.web.app/images/sunset-ocean-column.png">
+
+    <!-- JSON-LD Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "WINDKOG",
+      "url": "https://windkog-a4c20.web.app/",
+      "logo": "https://windkog-a4c20.web.app/favicon.ico",
+      "description": "Clean-tech innovator decoupling wind capture from power generation to maximize mechanical durability and weather protection.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Technical Inquiry",
+        "url": "https://windkog-a4c20.web.app/contact"
+      }
+    }
+    </script>
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="/favicon.ico">
 </head>
@@ -502,6 +536,22 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') shutLightbox();
         });
+
+        // --- Floating Back to Top Button ---
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
+    
+    <!-- Floating Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" title="Back to Top">↑</button>
 </body>
 </html>

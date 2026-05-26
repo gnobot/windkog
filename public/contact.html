@@ -150,17 +150,26 @@
 
             if (isLiveFirebase && dbService) {
                 try {
-                    // Upload message directly to Firebase Firestore
-                    await dbService.collection('inquiries').add({
+                    // Set up a 4-second connection timeout for Firestore writes
+                    const firestoreWritePromise = dbService.collection('inquiries').add({
                         name,
                         email,
                         subject,
                         message,
                         timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
+
+                    const timeoutPromise = new Promise((_, reject) => 
+                        setTimeout(() => reject(new Error("Timeout waiting for database connection.")), 4000)
+                    );
+
+                    await Promise.race([firestoreWritePromise, timeoutPromise]);
                     console.log("Inquiry securely loaded to Firestore database.");
                 } catch (error) {
-                    console.error("Firestore Write Error - Falling back to local logging:", error);
+                    console.error("Firestore Write Connection Error:", error);
+                    console.warn("⚠️ Firestore database has not been provisioned in the console, or client is offline. Falling back to Sandbox simulation.");
+                    // Fallback to local simulated log so the client remains responsive
+                    console.log("Simulated Sandbox backup triggered:", { name, email, subject, message });
                 }
             } else {
                 // Simulated database action

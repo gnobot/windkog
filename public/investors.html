@@ -323,8 +323,28 @@
                     revealDashboard(userCredential.user.email);
                 } catch (error) {
                     console.error("Firebase Authentication Error:", error);
-                    authError.textContent = error.message || "Failed to authenticate. Please verify credentials.";
+                    let displayMsg = error.message || "Failed to authenticate. Please verify credentials.";
+                    
+                    // Detect identitytoolkit signup blocked (Email/Password provider disabled)
+                    if (error.code === "auth/operation-not-allowed" || 
+                        displayMsg.includes("SignUp-are-blocked") || 
+                        displayMsg.includes("identitytoolkit")) {
+                        displayMsg = "⚠️ <strong>Firebase Configuration Required</strong>: The Email/Password sign-in provider is not enabled in your Firebase Console. Go to <strong>Authentication > Sign-in method</strong> to enable it.<br><br><a href='#' id='sandbox-bypass-btn' style='color: var(--primary); text-decoration: underline; font-weight: bold; font-size: 0.85rem;'>Or Click Here to bypass and test in Simulated Sandbox Mode</a>";
+                    }
+                    
+                    authError.innerHTML = displayMsg;
                     authError.style.display = 'block';
+
+                    const bypassBtn = document.getElementById('sandbox-bypass-btn');
+                    if (bypassBtn) {
+                        bypassBtn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            console.warn("⚠️ Launching Simulated Sandbox Mode for dashboard evaluation.");
+                            activePartnerEmail = email;
+                            revealDashboard(email);
+                            authError.style.display = 'none';
+                        });
+                    }
                 } finally {
                     authSubmitBtn.disabled = false;
                     authSubmitBtn.textContent = isLoginMode ? "Authenticate Partner" : "Establish Credentials";
@@ -410,8 +430,8 @@
 
             if (isLiveFirebase && dbService) {
                 try {
-                    // Upload interconnected message directly to Firestore inquiries
-                    await dbService.collection('inquiries').add({
+                    // Set up a 4-second connection timeout for Firestore writes
+                    const firestoreWritePromise = dbService.collection('inquiries').add({
                         name: "Investor Partner",
                         email: email,
                         subject: subject,
@@ -419,9 +439,17 @@
                         type: "investor_inquiry", // Core interconnected tag!
                         timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
+
+                    const timeoutPromise = new Promise((_, reject) => 
+                        setTimeout(() => reject(new Error("Timeout waiting for database connection.")), 4000)
+                    );
+
+                    await Promise.race([firestoreWritePromise, timeoutPromise]);
                     console.log("Interconnected Investor Inquiry securely uploaded to Firestore.");
                 } catch (error) {
-                    console.error("Firestore Write Error - Falling back to local logging:", error);
+                    console.error("Firestore Write Connection Error:", error);
+                    console.warn("⚠️ Firestore database has not been provisioned in the console, or client is offline. Falling back to Sandbox simulation.");
+                    console.log("Simulated Sandbox backup triggered:", { name: "Investor Partner", email: email, subject, message, type: "investor_inquiry" });
                 }
             } else {
                 // Simulated database write

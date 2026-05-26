@@ -3,22 +3,505 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windkog 2025</title>
+    <title>WINDKOG - Advanced Kinetic Power Systems</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/favicon.ico">
 </head>
 <body>
+
+    <!-- Premium Header -->
     <header>
         <h1>WIND KOG</h1>
+        <nav class="nav-links">
+            <a href="#" id="nav-home">Home</a>
+            <a href="#" id="nav-tech">Technology</a>
+            <a href="#" id="nav-showcase">Showcase</a>
+            <a href="#" id="nav-history">History</a>
+            <a href="#" id="nav-stem">STEM Kits</a>
+            <a href="/contact" id="nav-contact">Contact</a>
+            <a href="/investors" id="nav-investor">Investors</a>
+        </nav>
     </header>
+
+    <!-- Main Content Container -->
     <main>
-        <div class="enclosure">
-            <h1>Welcome to WIND KOG</h1>
-        </div>
+        
+        <!-- Hero Section Enclosure -->
+        <section class="enclosure" id="home">
+            <h2>Powering the Future <br><span>from the Past</span></h2>
+            <p class="motto">Decoupling mechanical rotation from power generation. Our advanced kinetic connections and ultralight WindBrella turbines shield sensitive components from the elements.</p>
+        </section>
+
+        <!-- Innovation Cards & Tech Specs Section -->
+        <section id="technology" style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="inline-section-header" style="margin-bottom: 2rem;">
+                <h2>Core <span>Innovations</span></h2>
+                <p>Click any card below to pop open its high-resolution blueprints, technical specs, and photos directly in-page.</p>
+            </div>
+
+            <!-- Interactive Info Cards Grid -->
+            <div class="card-container" id="tech-card-grid">
+                <!-- Card 1: WindBrella Turbines -->
+                <div class="card spec-trigger" data-type="windbrella">
+                    <span class="card-icon">🌀</span>
+                    <h3>WindBrella Turbines</h3>
+                    <p>Ultralight, high-tech WindBrella rotors engineered to transform traditional heavy plastic blades into sensitive, responsive multi-petal structures.</p>
+                    <button style="pointer-events: none;">Expand Blueprints</button>
+                </div>
+
+                <!-- Card 2: Kinetic Connections -->
+                <div class="card spec-trigger" data-type="kinetic">
+                    <span class="card-icon">🔗</span>
+                    <h3>Kinetic Connections</h3>
+                    <p>Decoupling wind capture from power generation. Mechanical torque linkages transmit power to ground level, keeping generators 100% free of weather.</p>
+                    <button class="secondary-btn" style="pointer-events: none;">Expand Schematics</button>
+                </div>
+
+                <!-- Card 3: Utility Platforms -->
+                <div class="card spec-trigger" data-type="utility">
+                    <span class="card-icon">🌐</span>
+                    <h3>Utility Platforms</h3>
+                    <p>Scaling the weatherproof revolution. We integrate WindBrella geometries and ground-based generators into highly scalable utility platforms.</p>
+                    <button class="secondary-btn" style="pointer-events: none;">Expand Concepts</button>
+                </div>
+
+                <!-- Card 4: STEM Education -->
+                <div class="card spec-trigger" data-type="stem">
+                    <span class="card-icon">🎓</span>
+                    <h3>STEM Education</h3>
+                    <p>Standardizing wind science. Academic curricula and hands-on builds designed around KOG fluid dynamics and decoupled power models.</p>
+                    <button class="secondary-btn" style="pointer-events: none;">Expand Curriculum</button>
+                </div>
+            </div>
+
+            <!-- Dynamic In-Page Technical Blueprint Drawer -->
+            <div class="tech-specs-panel" id="tech-specs">
+                <div class="tech-specs-layout">
+                    <!-- Left Specs Text and Table -->
+                    <div class="specs-content">
+                        <span class="specs-tag" id="spec-tag">System Blueprint</span>
+                        <h3 id="spec-title">Technical Specifications</h3>
+                        <p id="spec-description">Select a technology card above to review engineering specifications, parameters, and diagrams.</p>
+                        
+                        <table class="specs-table" id="spec-table">
+                            <!-- Populated by JS -->
+                        </table>
+                    </div>
+                    
+                    <!-- Right Blueprint Diagram with Fullscreen Zoom Trigger -->
+                    <div class="specs-diagram" id="spec-diagram-trigger" title="Click to view full screen">
+                        <img src="" alt="Technical blueprint schematic" id="spec-diagram-img">
+                        <div style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-top: 0.5rem;">🔍 Click image to zoom blueprints</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Heritage & Design Showcase Section -->
+        <section class="showcase-section" id="design-showcase">
+            <div class="showcase-header">
+                <h2>Designed to be <span>Seen</span></h2>
+                <p>The Windstrument turbine combines fluid aerodynamics with organic, flower-like geometry to create a clean-energy solution that coexists beautifully with human environments.</p>
+            </div>
+            
+            <div class="showcase-layout">
+                <!-- Large Featured Display -->
+                <div class="showcase-featured">
+                    <div class="featured-img-wrap" id="featured-trigger" title="Click to view full screen">
+                        <img src="images/sunset-ocean-column.png" alt="Windstrument paired turbines central column render" id="featured-img">
+                    </div>
+                    <div class="featured-caption" id="featured-caption">
+                        <strong>Scenic Central Column Integration</strong>: A state-of-the-art 3D model render showcasing paired Windstrument turbine units aligned vertically on a single support column, blending art and engineering.
+                    </div>
+                </div>
+                
+                <!-- Interactive Small Cards Grid -->
+                <div class="showcase-grid">
+                    <!-- Card 1: Original Blueprint -->
+                    <div class="gallery-card" data-img="images/peak-blueprint.jpg" data-caption="<strong>Peak Industries Technical Blueprint (March 2010)</strong>: The original proprietary manufacturing drawings, formally engineering-approved for prototype manufacturing and physical validation.">
+                        <div class="gallery-card-img-wrap">
+                            <img src="images/peak-blueprint.jpg" alt="Peak Industries original blueprint drawings">
+                        </div>
+                        <h4>Original Blueprints</h4>
+                        <p>Proprietary 2010 engineering blueprints approved by Peak Industries.</p>
+                    </div>
+                    
+                    <!-- Card 2: Vortex CAD Close-up -->
+                    <div class="gallery-card" data-img="images/rotor-cad-close.jpg" data-caption="<strong>Rotor Head CAD Analysis</strong>: A high-precision close-up of the overlapping multi-petal rotor shape, custom-engineered to initiate rotation under low-speed, multi-directional wind flow.">
+                        <div class="gallery-card-img-wrap">
+                            <img src="images/rotor-cad-close.jpg" alt="Rotor Head CAD design close up">
+                        </div>
+                        <h4>Vortex Rotor Geometry</h4>
+                        <p>Complex overlapping curves inspired by natural spiral shapes.</p>
+                    </div>
+                    
+                    <!-- Card 3: Desert Render -->
+                    <div class="gallery-card" data-img="images/desert-field-render.jpg" data-caption="<strong>Desert Installation Concept</strong>: Beautiful rendering of a multi-turbine field installation, proving that sustainable utility-scale platforms can look artistic and visually pleasing.">
+                        <div class="gallery-card-img-wrap">
+                            <img src="images/desert-field-render.jpg" alt="Windstrument orchid turbine field render">
+                        </div>
+                        <h4>Field Landscape Render</h4>
+                        <p>Elegant orchid-like wind farm blending beautifully with the horizon.</p>
+                    </div>
+                    
+                    <!-- Card 4: Physical Test -->
+                    <div class="gallery-card" data-img="images/wind-tunnel-spin.png" data-caption="<strong>Physical Wind Tunnel Prototype Spinning</strong>: An authentic snapshot of the physical prototype during high-stress testing in the Ford Jacobsen wind tunnel session.">
+                        <div class="gallery-card-img-wrap">
+                            <img src="images/wind-tunnel-spin.png" alt="Windstrument prototype spinning in wind tunnel">
+                        </div>
+                        <h4>Physical Validation</h4>
+                        <p>Physical prototype spinning in high-stress wind tunnel testing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inline Technical History Timeline Section -->
+        <section class="inline-section" id="history-section">
+            <div class="inline-section-header">
+                <h2>Technical <span>History</span></h2>
+                <p>The evolutionary design and validation history of the Kinetigy Optimized Generator.</p>
+            </div>
+
+            <div class="inline-timeline">
+                <!-- Milestone 1 -->
+                <div class="timeline-item">
+                    <span class="timeline-icon">1</span>
+                    <div class="timeline-card">
+                        <h3>Genesis & Theoretical Modeling</h3>
+                        <p>The project initiated with mathematical modeling focused on reducing mechanical cogging torque and maximizing low-speed starting efficiency. Early efforts drafted theoretical generator stator configurations to decouple drivetrain forces.</p>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="timeline-item">
+                    <span class="timeline-icon">2</span>
+                    <div class="timeline-card">
+                        <h3>Prototype Dynamometer Testing</h3>
+                        <p>Constructed the Gen-1 prototype casing and conducted precise laboratory dynamometer analysis to isolate electrical friction losses. The results successfully validated the base mechanical architecture under constant loading patterns.</p>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="timeline-item">
+                    <span class="timeline-icon">3</span>
+                    <div class="timeline-card">
+                        <h3>Ford Jacobsen Wind Tunnel validation</h3>
+                        <p>Conducted extensive aerodynamic tests inside the Ford Jacobsen wind tunnel, subjecting the Windstrument turbine and structural columns to linear wind vectors scaling from 0 to 70 mph to establish peak mechanical load thresholds.</p>
+                        
+                        <!-- Inline raw video download block -->
+                        <div class="custom-player-wrapper" style="margin-top: 1.5rem;">
+                            <div class="player-compatibility-alert">
+                                <span style="font-size: 1.25rem;">ℹ️</span>
+                                <div>
+                                    <strong>Browser Notice:</strong> The raw capture file <code>windtun_testclip.avi</code> is optimized for academic and engineering analysis. For optimal in-browser playback, download and open the file in standard media players.
+                                </div>
+                            </div>
+                            <div class="player-waveform-card">
+                                <div class="player-technical-grid"></div>
+                                <div class="player-waveform-lines">
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                </div>
+                                <div class="player-file-info">
+                                    <div class="player-file-name">windtun_testclip.avi</div>
+                                    <div class="player-file-meta">Raw Aero Capture | 4.04 MB</div>
+                                </div>
+                            </div>
+                            <a href="images/windtun_testclip.avi" download style="text-decoration: none;">
+                                <button class="secondary-btn">💾 Download Technical Video (.avi)</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Milestone 4 -->
+                <div class="timeline-item">
+                    <span class="timeline-icon">4</span>
+                    <div class="timeline-card">
+                        <h3>Performance & Separation Curve Analysis</h3>
+                        <div class="power-curve-wrapper" style="margin-bottom: 1.5rem;">
+                            <img src="images/power-curve.jpg" class="img-responsive" alt="WIND KOG 1kW Reference Model Power Curve Analysis" style="width:100%; border-radius: 12px; display: block; border: 1px solid var(--border-white);">
+                        </div>
+                        <p>Wind tunnel data successfully mapped the 1kW, 500W, and 100W performance curve baselines. The sessions validated that decoupling mechanical wind rotation from the weatherproof generator using WindKOG's kinetic connections maintains full efficiency while ensuring electrical systems remain shielded from the outdoor elements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inline STEM Classroom Kits Section -->
+        <section class="inline-section" id="stem-section">
+            <div class="inline-section-header">
+                <h2>STEM Classroom <span>Kits</span></h2>
+                <p>Bringing advanced fluid dynamics and weatherproof generation models into primary, secondary, and college labs.</p>
+            </div>
+
+            <div class="inline-stem-grid">
+                <!-- Kit 1 -->
+                <div class="stem-card">
+                    <div class="stem-card-header">
+                        <span class="stem-kit-tag">Primary Mechanics</span>
+                        <span style="font-size: 1.5rem;">⚙️</span>
+                    </div>
+                    <h4>KOG Micro-Generator Kit</h4>
+                    <p>A high-visibility, transparent educational turbine rig. Students wrap custom stators and coils, physically observing Faraday's law, magnetic induction, and gear conversions first-hand.</p>
+                    <div class="stem-card-footer">
+                        <span>Grades: <strong>6-9</strong></span>
+                        <span>Level: <strong>Beginner</strong></span>
+                    </div>
+                </div>
+
+                <!-- Kit 2 -->
+                <div class="stem-card">
+                    <div class="stem-card-header">
+                        <span class="stem-kit-tag">Electronics & Code</span>
+                        <span style="font-size: 1.5rem;">💻</span>
+                    </div>
+                    <h4>Digital Anemometer Build</h4>
+                    <p>Combine physics with code. Students assemble a rotational cup wind speed sensor, writing basic Arduino scripts to calculate linear velocities and display telemetry on a LCD screen.</p>
+                    <div class="stem-card-footer">
+                        <span>Grades: <strong>9-12</strong></span>
+                        <span>Level: <strong>Intermediate</strong></span>
+                    </div>
+                </div>
+
+                <!-- Kit 3 -->
+                <div class="stem-card">
+                    <div class="stem-card-header">
+                        <span class="stem-kit-tag">Fluid Aerodynamics</span>
+                        <span style="font-size: 1.5rem;">💨</span>
+                    </div>
+                    <h4>Blade Pitch Testing Rig</h4>
+                    <p>An advanced aerodynamics lab tunnel. Students analyze variable pitch angles, surface area drags, and multi-petal lift properties to calculate coefficients of power and lift scaling.</p>
+                    <div class="stem-card-footer">
+                        <span>Grades: <strong>10-College</strong></span>
+                        <span>Level: <strong>Advanced</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
+
+    <!-- Fullscreen Image Lightbox Modal (For diagram detail zoom) -->
+    <div class="lightbox-modal" id="lightbox-modal">
+        <button class="lightbox-close" id="close-lightbox">✕</button>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="Zoomed technical blueprint">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <div>WindKOG</div>
-        <hr style="width:50%; opacity:0.3; margin: 10px auto;">
-        <div>windkog.com 2025</div>
+        <div class="footer-brand">WIND KOG</div>
+        <hr>
+        <div class="footer-copyright">All rights reserved &bull; windkog.com &bull; Copyright &copy; 2026</div>
     </footer>
+
+    <!-- Interactive JS Functionality -->
+    <script>
+        // --- Navigation Anchors Scrolling ---
+        const scrollAnchors = [
+            { linkId: 'nav-home', targetId: 'home' },
+            { linkId: 'nav-tech', targetId: 'technology' },
+            { linkId: 'nav-showcase', targetId: 'design-showcase' },
+            { linkId: 'nav-history', targetId: 'history-section' },
+            { linkId: 'nav-stem', targetId: 'stem-section' }
+        ];
+
+        scrollAnchors.forEach(anchor => {
+            const link = document.getElementById(anchor.linkId);
+            const target = document.getElementById(anchor.targetId);
+            if (link && target) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+        });
+
+        // --- Interactive In-Page Technical Blueprint Drawer ---
+        const specTriggers = document.querySelectorAll('.spec-trigger');
+        const specsPanel = document.getElementById('tech-specs');
+        const specTag = document.getElementById('spec-tag');
+        const specTitle = document.getElementById('spec-title');
+        const specDescription = document.getElementById('spec-description');
+        const specTable = document.getElementById('spec-table');
+        const specDiagramImg = document.getElementById('spec-diagram-img');
+        const specDiagramTrigger = document.getElementById('spec-diagram-trigger');
+
+        // Technical specs dataset
+        const specData = {
+            windbrella: {
+                tag: "Aerodynamic Subsystem",
+                title: "Ultralight WindBrella Rotors",
+                description: "Our proprietary flower-like vertical axis rotor geometries. Constructed from advanced high-tech carbon composite matrices, these designs transform older, heavy plastic injection blade layouts into featherlight, high-torque micro-petals capable of spinning under minimal linear velocities.",
+                diagram: "images/rotor-cad-close.jpg",
+                caption: "<strong>Rotor Head CAD Analysis</strong>: A high-precision close-up of the overlapping multi-petal rotor shape, custom-engineered to initiate rotation under low-speed, multi-directional wind flow.",
+                table: [
+                    { label: "Material Composition", val: "Carbon-Fiber Reinforced Matrix" },
+                    { label: "Startup Wind Velocity", val: "< 3.5 mph (1.5 m/s)" },
+                    { label: "Rotor Layout Diameter", val: "1.2 Meters (Standard Unit)" },
+                    { label: "Rotor Net Weight", val: "2.4 kg (Ultralight Profile)" },
+                    { label: "Power Coefficient (Cp)", val: "0.38 at Design Tip-Speed Ratio" }
+                ]
+            },
+            kinetic: {
+                tag: "Mechanical Transmission",
+                title: "Weatherproof Kinetic Decoupler",
+                description: "The secret core of WindKOG. decupling mechanical wind forces from the generator stator. Heavy and moisture-sensitive copper coils are removed from the turbine mast entirely and placed inside an insulated, ground-level shelter. Ratios are managed via a flexible rotational driveshaft that transfers raw torque without electrical decay.",
+                diagram: "images/peak-blueprint.jpg",
+                caption: "<strong>Peak Industries Technical Blueprint (March 2010)</strong>: The original proprietary manufacturing drawings, formally engineering-approved for prototype manufacturing and physical validation.",
+                table: [
+                    { label: "Power Linkage Model", val: "Flexible Kinetic Coupling (Decoupled)" },
+                    { label: "Generator Placement", val: "Ground-Level Weatherproof Vault" },
+                    { label: "Mechanical Transfer Eff.", val: "97.6% (Dry Gearing Link)" },
+                    { label: "Weather Protection Index", val: "IP68 (Electrical Housing Subsystem)" },
+                    { label: "Max Mast Height Scaling", val: "Up to 30 Meters" }
+                ]
+            },
+            utility: {
+                tag: "Scale Architecture",
+                title: "Utility Platform Integrations",
+                description: "High-capacity modular arrays utilizing stacked turbine column designs. By utilizing ground-based central KOG drivetrains, a single structural mast can anchor multiple vertical wind-capture units in pairs, maximizing regional spatial yields while ensuring maintenance tasks require zero climbing or tower climbs.",
+                diagram: "images/desert-field-render.jpg",
+                caption: "<strong>Desert Installation Concept</strong>: Beautiful rendering of a multi-turbine field installation, proving that sustainable utility-scale platforms can look artistic and visually pleasing.",
+                table: [
+                    { label: "Platform Footprint", val: "Modular Column Clusters" },
+                    { label: "Standard Output Rating", val: "10kW to 100kW stacks" },
+                    { label: "Decoupled Power Transfer", val: "Coaxial Shaft Drivetrain" },
+                    { label: "Maintenance Downtime", val: "Reduced by 85% (Ground Access)" },
+                    { label: "Structural Base Gearing", val: "Decoupled Low-Friction Bearings" }
+                ]
+            },
+            stem: {
+                tag: "Educational Core",
+                title: "STEM Classroom Curriculum",
+                description: "Hands-on student engineering modules designed directly around WindKOG's fluid mechanics and weatherproof decoupled generator mechanics. Kits include scale components allowing classrooms to physically test stator inductions, wind speed logging, and blade pitch drag ratios.",
+                diagram: "images/sunset-ocean-column.png",
+                caption: "<strong>Scenic Central Column Integration</strong>: A state-of-the-art 3D model render showcasing paired Windstrument turbine units aligned vertically on a single support column, blending art and engineering.",
+                table: [
+                    { label: "Available Builds", val: "KOG Micro-Generator / Anemometer / Pitch Rig" },
+                    { label: "Grade Brackets", val: "6th Grade to College Physics" },
+                    { label: "Programming Hooks", val: "Arduino Nano C++ Sensor Logs" },
+                    { label: "Accreditation", val: "Sustainable Energy Engineering standards" },
+                    { label: "Materials Standard", val: "Biodegradable PLA / Transparent Acrylic" }
+                ]
+            }
+        };
+
+        // Handle Card Clicks to Pop Open Content Inline
+        specTriggers.forEach(card => {
+            card.addEventListener('click', () => {
+                const type = card.getAttribute('data-type');
+                const data = specData[type];
+
+                if (!data) return;
+
+                // Toggle active card styling
+                specTriggers.forEach(c => c.classList.remove('active-spec'));
+                card.classList.add('active-spec');
+
+                // Populate specs panel details
+                specTag.textContent = data.tag;
+                specTitle.textContent = data.title;
+                specDescription.textContent = data.description;
+                specDiagramImg.src = data.diagram;
+                specDiagramImg.alt = data.title;
+                specDiagramTrigger.setAttribute('data-caption', data.caption);
+
+                // Populate Table
+                let tableHtml = '';
+                data.table.forEach(row => {
+                    tableHtml += `
+                        <tr>
+                            <td class="label">${row.label}</td>
+                            <td class="val">${row.val}</td>
+                        </tr>
+                    `;
+                });
+                specTable.innerHTML = tableHtml;
+
+                // Slide open specs panel in-page
+                specsPanel.classList.add('active');
+
+                // Smoothly scroll down to specifications focus
+                setTimeout(() => {
+                    specsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            });
+        });
+
+        // --- Design Showcase Interactivity ---
+        const featuredImg = document.getElementById('featured-img');
+        const featuredCaption = document.getElementById('featured-caption');
+        const featuredTrigger = document.getElementById('featured-trigger');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+
+        // Swap Featured Image on gallery card click
+        galleryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const imgUrl = card.getAttribute('data-img');
+                const captionText = card.getAttribute('data-caption');
+                
+                featuredImg.src = imgUrl;
+                featuredCaption.innerHTML = captionText;
+                
+                // Micro-pulse visual feedback
+                featuredImg.style.transform = 'scale(0.97)';
+                featuredImg.style.opacity = '0.8';
+                setTimeout(() => {
+                    featuredImg.style.transform = 'none';
+                    featuredImg.style.opacity = '1';
+                }, 180);
+            });
+        });
+
+        // --- Immersive Fullscreen Lightbox Zoom Modal ---
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeLightbox = document.getElementById('close-lightbox');
+
+        const openZoom = (src, caption) => {
+            lightboxImg.src = src;
+            lightboxCaption.innerHTML = caption;
+            lightboxModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Zoom from Large Showcase Display
+        featuredTrigger.addEventListener('click', () => {
+            openZoom(featuredImg.src, featuredCaption.innerHTML);
+        });
+
+        // Zoom from Tech Spec Diagram Display
+        specDiagramTrigger.addEventListener('click', () => {
+            const caption = specDiagramTrigger.getAttribute('data-caption');
+            openZoom(specDiagramImg.src, caption);
+        });
+
+        // Close Lightbox
+        const shutLightbox = () => {
+            lightboxModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+        closeLightbox.addEventListener('click', shutLightbox);
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) shutLightbox();
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') shutLightbox();
+        });
+    </script>
 </body>
 </html>

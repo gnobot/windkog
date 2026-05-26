@@ -1732,3 +1732,167 @@ footer .footer-copyright {
 .back-to-top:active {
     transform: translateY(-1px);
 }
+
+/* ==========================================
+   📱 MOBILE & TABLET LAYOUT RESPONSIVENESS
+   ========================================== */
+
+/* Tablet Viewport (Under 992px) */
+@media (max-width: 992px) {
+    main {
+        padding: 2rem 1.5rem;
+        gap: 2.5rem;
+    }
+    
+    .showcase-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Smartphone Viewport (Under 768px) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 1.25rem 1rem;
+    }
+
+    header h1 {
+        font-size: 1.85rem;
+        text-shadow: 0 0 15px rgba(0, 242, 254, 0.35);
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem 0.6rem;
+        width: 100%;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.55rem;
+    }
+}
+
+/* Compact Mobile Viewport (Under 576px) */
+@media (max-width: 576px) {
+    main {
+        padding: 1.5rem 1rem;
+        gap: 2rem;
+    }
+
+    /* Hero Section */
+    .enclosure {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .enclosure h2 {
+        font-size: 2.15rem;
+        line-height: 1.2;
+    }
+
+    .motto {
+        font-size: 0.95rem;
+        margin-top: 0.85rem;
+    }
+
+    /* Core Innovations / Technology Cards */
+    .card-container {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .card {
+        padding: 1.75rem;
+    }
+
+    /* Technical Specification Active Panel */
+    .tech-specs-panel.active {
+        padding: 1.25rem;
+        margin-top: 1.5rem;
+    }
+
+    .specs-content h3 {
+        font-size: 1.45rem;
+    }
+
+    .specs-table td {
+        padding: 0.5rem 0;
+        font-size: 0.825rem;
+    }
+
+    .specs-diagram img {
+        max-height: 220px;
+    }
+
+    /* Design Showcase Section */
+    .featured-img-wrap {
+        height: 240px;
+    }
+
+    .featured-caption {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    /* Inline Section General Overrides */
+    .inline-section {
+        padding: 2rem 1.25rem;
+        border-radius: 18px;
+    }
+
+    .inline-section-header {
+        margin-bottom: 2rem;
+    }
+
+    .inline-section-header h2 {
+        font-size: 1.85rem;
+    }
+
+    .inline-section-header p {
+        font-size: 0.95rem;
+    }
+
+    /* Timeline Adjustments */
+    .inline-timeline::before {
+        left: 17px;
+    }
+
+    .timeline-item {
+        padding-left: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-icon {
+        left: 2px;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .timeline-card {
+        padding: 1.25rem;
+    }
+
+    .timeline-card h3 {
+        font-size: 1.15rem;
+    }
+
+    .timeline-card p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    /* Floating Back to Top adjustment */
+    .back-to-top {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1.25rem;
+    }
+}

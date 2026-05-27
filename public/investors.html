@@ -225,37 +225,39 @@
         // ==========================================
         // 🔥 LIVE FIREBASE & SIMULATION SYSTEM 🔥
         // ==========================================
-        
-        // Active Firebase configuration utilizing real API Keys
-        const firebaseConfig = {
-            apiKey: "AIzaSyCKpgdPCwYlArdInSURH7Cbu315HA7EnnI",
-            authDomain: "windkog-a4c20.firebaseapp.com",
-            projectId: "windkog-a4c20",
-            storageBucket: "windkog-a4c20.firebasestorage.app",
-            messagingSenderId: "935672455332",
-            appId: "1:935672455332:web:aeadda34f57cc15fd34631",
-            measurementId: "G-KY5K9KFSTQ"
-        };
-
         let isLiveFirebase = false;
         let authService = null;
         let dbService = null;
         let activePartnerEmail = "";
 
-        // Auto-detect and Initialize Firebase
-        try {
-            if (window.firebase && firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith("your_")) {
-                firebase.initializeApp(firebaseConfig);
-                authService = firebase.auth();
-                dbService = firebase.firestore();
-                isLiveFirebase = true;
-                console.log("🔥 Live Firebase SDK Auth and Firestore services connected.");
-            } else {
-                console.log("ℹ️ Running in Sandbox Simulation Mode (Placeholder API Key or offline).");
+        // Auto-detect and Initialize Firebase securely via a gitignored configuration file
+        async function initFirebase() {
+            try {
+                const response = await fetch('/firebase-config.json');
+                if (!response.ok) throw new Error("Config not found");
+                const config = await response.json();
+                
+                if (window.firebase && config.apiKey) {
+                    firebase.initializeApp(config);
+                    authService = firebase.auth();
+                    dbService = firebase.firestore();
+                    isLiveFirebase = true;
+                    console.log("🔥 Live Firebase SDK Auth and Firestore services connected securely.");
+                    
+                    // Start monitoring auth state
+                    authService.onAuthStateChanged((user) => {
+                        if (user) {
+                            activePartnerEmail = user.email;
+                            revealDashboard(user.email);
+                        }
+                    });
+                }
+            } catch (e) {
+                console.log("ℹ️ Running in Sandbox Simulation Mode:", e.message);
             }
-        } catch (e) {
-            console.error("Firebase Init Error - falling back to High-End Simulated Environment:", e);
         }
+
+        const initPromise = initFirebase();
 
 
         // --- Investor Relations Authentication & Registration ---
@@ -298,6 +300,9 @@
         // Submit Login or Create Account
         investorForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            // Wait for configuration to load
+            await initPromise;
 
             const email = document.getElementById('auth-email').value.trim();
             const password = document.getElementById('auth-password').value;
@@ -375,6 +380,7 @@
 
         // Logout action
         logoutBtn.addEventListener('click', async () => {
+            await initPromise;
             if (isLiveFirebase && authService) {
                 await authService.signOut();
                 console.log("Logged out live user.");
@@ -400,15 +406,7 @@
             inquiryForm.style.display = 'block';
         });
 
-        // Monitor Auth State if Live Firebase is connected
-        if (isLiveFirebase && authService) {
-            authService.onAuthStateChanged((user) => {
-                if (user) {
-                    activePartnerEmail = user.email;
-                    revealDashboard(user.email);
-                }
-            });
-        }
+        // Note: Auth monitor is handled securely within the initFirebase promise lifecycle.
 
 
         // ==========================================
@@ -421,6 +419,9 @@
 
         inquiryForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            // Wait for configuration to load
+            await initPromise;
 
             const subject = document.getElementById('inquiry-subject').value.trim();
             const message = document.getElementById('inquiry-message').value.trim();

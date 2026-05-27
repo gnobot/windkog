@@ -103,33 +103,28 @@
         // 🔥 LIVE FIREBASE & SIMULATION SYSTEM 🔥
         // ==========================================
         
-        // Active Firebase configuration utilizing real API Keys
-        const firebaseConfig = {
-            apiKey: "AIzaSyCKpgdPCwYlArdInSURH7Cbu315HA7EnnI",
-            authDomain: "windkog-a4c20.firebaseapp.com",
-            projectId: "windkog-a4c20",
-            storageBucket: "windkog-a4c20.firebasestorage.app",
-            messagingSenderId: "935672455332",
-            appId: "1:935672455332:web:aeadda34f57cc15fd34631",
-            measurementId: "G-KY5K9KFSTQ"
-        };
-
         let isLiveFirebase = false;
         let dbService = null;
 
-        // Auto-detect and Initialize Firebase
-        try {
-            if (window.firebase && firebaseConfig.apiKey && !firebaseConfig.apiKey.startsWith("your_")) {
-                firebase.initializeApp(firebaseConfig);
-                dbService = firebase.firestore();
-                isLiveFirebase = true;
-                console.log("🔥 Live Firebase SDK connected.");
-            } else {
-                console.log("ℹ️ Running in Sandbox Simulation Mode (Placeholder API Key or offline).");
+        // Auto-detect and Initialize Firebase securely via a gitignored configuration file
+        async function initFirebase() {
+            try {
+                const response = await fetch('/firebase-config.json');
+                if (!response.ok) throw new Error("Config not found");
+                const config = await response.json();
+                
+                if (window.firebase && config.apiKey) {
+                    firebase.initializeApp(config);
+                    dbService = firebase.firestore();
+                    isLiveFirebase = true;
+                    console.log("🔥 Live Firebase SDK connected securely.");
+                }
+            } catch (e) {
+                console.log("ℹ️ Running in Sandbox Simulation Mode:", e.message);
             }
-        } catch (e) {
-            console.error("Firebase Init Error - falling back to High-End Simulated Environment:", e);
         }
+
+        const initPromise = initFirebase();
 
         // --- Contact Form Submission ---
         const contactForm = document.getElementById('contact-form');
@@ -140,6 +135,9 @@
 
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            // Ensure Firebase config is loaded
+            await initPromise;
             
             const name = document.getElementById('contact-name').value.trim();
             const email = document.getElementById('contact-email').value.trim();
